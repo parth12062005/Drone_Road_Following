@@ -12,17 +12,17 @@ def main():
     rviz_config_path = os.path.join(parent_dir, "Scripts", "config.rviz")
     qgc_path = os.path.join(parent_dir, "/home/mr_robot/Desktop/Git/Drone", "QGroundControl-x86_64.AppImage")
 
-    px4_cmd = ["make", "px4_sitl", "gz_x500_mono_cam_baylands"]
+    px4_cmd = ["make", "px4_sitl", "gz_x500_mono_cam_down_baylands"]
 
     #/world/baylands/model/x500_mono_cam_0/link/camera_link/sensor/imager/image
 
     bridge_params = [
         "ros2", "run", "ros_gz_bridge", "parameter_bridge",
-        "/world/baylands/model/x500_mono_cam_0/link/camera_link/sensor/imager/image@sensor_msgs/msg/Image@gz.msgs.Image",
-        "/world/baylands/model/x500_mono_cam_0/link/camera_link/sensor/imager/camera_info@gz.msgs.CameraInfo",
+        "/world/baylands/model/x500_mono_cam_down_0/link/camera_link/sensor/imager/image@sensor_msgs/msg/Image@gz.msgs.Image",
+        "/world/baylands/model/x500_mono_cam_down_0/link/camera_link/sensor/imager/camera_info@gz.msgs.CameraInfo",
         "--ros-args",
-        "-r", "/world/baylands/model/x500_mono_cam_0/link/camera_link/sensor/imager/image:=/camera/down_left/image",
-        "-r", "/world/baylands/model/x500_mono_cam_0/link/camera_link/sensor/imager/camera_info:=/camera/down_left/camera_info"
+        "-r", "/world/baylands/model/x500_mono_cam_down_0/link/camera_link/sensor/imager/image:=/camera/down_left/image",
+        "-r", "/world/baylands/model/x500_mono_cam_down_0/link/camera_link/sensor/imager/camera_info:=/camera/down_left/camera_info"
     ]
     bridge_cmd_str = " ".join(bridge_params) + "; exec bash"
 
