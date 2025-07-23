@@ -8,31 +8,21 @@ def main():
     script_dir = os.path.dirname(os.path.realpath(__file__))
     parent_dir = os.path.abspath(os.path.join(script_dir, ".."))
 
-    px4_dir = os.path.join(parent_dir, "Applications", "PX4-Autopilot")
+    px4_dir = os.path.join(parent_dir, "/home/mr_robot", "PX4-Autopilot")
     rviz_config_path = os.path.join(parent_dir, "Scripts", "config.rviz")
-    qgc_path = os.path.join(parent_dir, "Applications", "QGroundControl.AppImage")
+    qgc_path = os.path.join(parent_dir, "/home/mr_robot/Desktop/Git/Drone", "QGroundControl-x86_64.AppImage")
 
     px4_cmd = ["make", "px4_sitl", "gz_x500_mono_cam_baylands"]
 
+    #/world/baylands/model/x500_mono_cam_down_0/link/camera_link/sensor/imager/image
+
     bridge_params = [
         "ros2", "run", "ros_gz_bridge", "parameter_bridge",
-        "/world/baylands/model/x500_mono_cam_0/model/front_left_cam/link/camera_link/sensor/imager/image@sensor_msgs/msg/Image@gz.msgs.Image",
-        "/world/baylands/model/x500_mono_cam_0/model/front_left_cam/link/camera_link/sensor/imager/camera_info@sensor_msgs/msg/CameraInfo@gz.msgs.CameraInfo",
-        "/world/baylands/model/x500_mono_cam_0/model/front_right_cam/link/camera_link/sensor/imager/image@sensor_msgs/msg/Image@gz.msgs.Image",
-        "/world/baylands/model/x500_mono_cam_0/model/front_right_cam/link/camera_link/sensor/imager/camera_info@sensor_msgs/msg/CameraInfo@gz.msgs.CameraInfo",
-        "/world/baylands/model/x500_mono_cam_0/model/down_cam_left/link/camera_link/sensor/imager/image@sensor_msgs/msg/Image@gz.msgs.Image",
-        "/world/baylands/model/x500_mono_cam_0/model/down_cam_left/link/camera_link/sensor/imager/camera_info@sensor_msgs/msg/CameraInfo@gz.msgs.CameraInfo",
-        "/world/baylands/model/x500_mono_cam_0/model/down_cam_right/link/camera_link/sensor/imager/image@sensor_msgs/msg/Image@gz.msgs.Image",
-        "/world/baylands/model/x500_mono_cam_0/model/down_cam_right/link/camera_link/sensor/imager/camera_info@sensor_msgs/msg/CameraInfo@gz.msgs.CameraInfo",
+        "/camera@sensor_msgs/msg/Image@gz.msgs.Image",
+        "/camera_info@gz.msgs.CameraInfo",
         "--ros-args",
-        "-r", "/world/baylands/model/x500_mono_cam_0/model/front_left_cam/link/camera_link/sensor/imager/image:=/camera/front_left/image",
-        "-r", "/world/baylands/model/x500_mono_cam_0/model/front_left_cam/link/camera_link/sensor/imager/camera_info:=/camera/front_left/camera_info",
-        "-r", "/world/baylands/model/x500_mono_cam_0/model/front_right_cam/link/camera_link/sensor/imager/image:=/camera/front_right/image",
-        "-r", "/world/baylands/model/x500_mono_cam_0/model/front_right_cam/link/camera_link/sensor/imager/camera_info:=/camera/front_right/camera_info",
-        "-r", "/world/baylands/model/x500_mono_cam_0/model/down_cam_left/link/camera_link/sensor/imager/image:=/camera/down_left/image",
-        "-r", "/world/baylands/model/x500_mono_cam_0/model/down_cam_left/link/camera_link/sensor/imager/camera_info:=/camera/down_left/camera_info",
-        "-r", "/world/baylands/model/x500_mono_cam_0/model/down_cam_right/link/camera_link/sensor/imager/image:=/camera/down_right/image",
-        "-r", "/world/baylands/model/x500_mono_cam_0/model/down_cam_right/link/camera_link/sensor/imager/camera_info:=/camera/down_right/camera_info"
+        "-r", "/camera:=/camera/down_left/image",
+        "-r", "/camera_info:=/camera/down_left/camera_info"
     ]
     bridge_cmd_str = " ".join(bridge_params) + "; exec bash"
 

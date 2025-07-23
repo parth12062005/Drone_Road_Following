@@ -27,7 +27,7 @@ def launch_in_new_gnome_terminal(python_script: Path) -> subprocess.Popen:
         "gnome-terminal",
         "--",                      
         "bash", "-c",
-        f"python3 \"{python_script}\"; exec bash"
+        f"source ~/yolo_env/bin/activate; python3 \"{python_script}\"; exec bash"
     ])
 
 # ── GLOBALS ──────────────────────────────────────────────────────────────────────
