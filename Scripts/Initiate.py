@@ -14,15 +14,15 @@ def main():
 
     px4_cmd = ["make", "px4_sitl", "gz_x500_mono_cam_baylands"]
 
-    #/world/baylands/model/x500_mono_cam_down_0/link/camera_link/sensor/imager/image
+    #/world/baylands/model/x500_mono_cam_0/link/camera_link/sensor/imager/image
 
     bridge_params = [
         "ros2", "run", "ros_gz_bridge", "parameter_bridge",
-        "/camera@sensor_msgs/msg/Image@gz.msgs.Image",
-        "/camera_info@gz.msgs.CameraInfo",
+        "/world/baylands/model/x500_mono_cam_0/link/camera_link/sensor/imager/image@sensor_msgs/msg/Image@gz.msgs.Image",
+        "/world/baylands/model/x500_mono_cam_0/link/camera_link/sensor/imager/camera_info@gz.msgs.CameraInfo",
         "--ros-args",
-        "-r", "/camera:=/camera/down_left/image",
-        "-r", "/camera_info:=/camera/down_left/camera_info"
+        "-r", "/world/baylands/model/x500_mono_cam_0/link/camera_link/sensor/imager/image:=/camera/down_left/image",
+        "-r", "/world/baylands/model/x500_mono_cam_0/link/camera_link/sensor/imager/camera_info:=/camera/down_left/camera_info"
     ]
     bridge_cmd_str = " ".join(bridge_params) + "; exec bash"
 
