@@ -60,6 +60,7 @@ class MissionControllerNode(Node):
             PoseStamped, '/mavros/setpoint_position/local', setpoint_qos)
         self.setpoint_vel_pub = self.create_publisher(
             Twist, '/mavros/setpoint_velocity/cmd_vel_unstamped', setpoint_qos)
+        
         self.arm_client = self.create_client(CommandBool, '/mavros/cmd/arming')
         self.set_mode_client = self.create_client(SetMode, '/mavros/set_mode')
 
@@ -85,7 +86,7 @@ class MissionControllerNode(Node):
         self.altitude_tolerance = 0.3
         self.takeoff_timeout = 30.0
         self.forward_speed = 2
-        self.yaw_rate_gain = -0.01
+        self.yaw_rate_gain = -0.0001
 
         # Control loop at 10 Hz
         self.create_timer(0.1, self.control_loop)
@@ -181,7 +182,7 @@ class MissionControllerNode(Node):
                 self.get_logger().info("Reached takeoff altitude!")
             return
 
-                    # 4) LINE FOLLOWING: steer *toward* forward‑point + yaw so the red line is vertical
+        # 4) LINE FOLLOWING: steer *toward* forward‑point + yaw so the red line is vertical
         if self.road_line_img is None:
             self.get_logger().warn("No /road_line, hovering.", throttle_duration_sec=2)
             self.setpoint_vel_pub.publish(Twist())

@@ -363,7 +363,7 @@ class MissionControllerNode(Node):
         self.setpoint_vel_pub.publish(cmd)
 
         # 4.13) Debug info
-        self.get_logger().debug(
+        self.get_logger().warning(
             f"yaw={math.degrees(ψ):.1f}°, angle_line={angle_line:.2f}, "
             f"raw_ang_err={raw_angle_error:.2f}, filt_ang_err={angle_error:.2f}, "
             f"centroid_x={centroid_x:.1f}, err_x_norm={error_x_norm:.2f}, "
