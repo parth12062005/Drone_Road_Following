@@ -1,0 +1,4 @@
+[submodule "px4_ros2_examples_ws"]
+	path = px4_ros2_examples_ws
+	url = git@github.com:ROM-robotics/px4_ros2_examples_ws.git
+	branch = rom_custom_mode
